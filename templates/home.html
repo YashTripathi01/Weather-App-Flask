@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}"
+        />
+        <title>Weather App</title>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-dark bg-dark">
+                <span class="navbar-brand mb-0 h1"
+                    >What's the weather like ?</span
+                >
+            </nav>
+        </div>
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-4">
+                    <form method="POST" class="form-inline">
+                        <div class="form-group mx-sm-3 mb-2 my-3">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="city"
+                                placeholder="Enter a city"
+                                name="city"
+                            />
+                        </div>
+                        <input
+                            class="btn btn-dark"
+                            type="submit"
+                            value="Add City"
+                        />
+                    </form>
+                    {% with messages =
+                    get_flashed_messages(with_categories=true) %} {% if messages
+                    %} {% for category, message in messages %} {% set
+                    message_class = 'alert-success' %} {% if category == 'error'
+                    %} {% set message_class = 'alert-danger' %} {% endif %}
+
+                    <div
+                        class="alert {{ message_class }} alert-dismissable fade show"
+                        role="alert"
+                    >
+                        {{ message }}
+                    </div>
+
+                    {% endfor %} {% endif %} {% endwith %}
+                </div>
+                <div class="container">
+                    <ul class="appdata">
+                        {% for weather in weather_data %}
+                        <li>
+                            <div class="media border p-2">
+                                <img
+                                    src="http://openweathermap.org/img/w/{{weather.icon}}.png"
+                                    class="mr-3"
+                                    alt="Image"
+                                />
+                                <div class="media-body">
+                                    <p>
+                                        <span class="title"
+                                            >{{ weather.city }}</span
+                                        >
+                                        <br />
+                                        <span class="subtitle"
+                                            >{{ weather.temperature }}° C</span
+                                        >
+                                        <br />
+                                        {{ weather.description }}
+                                    </p>
+                                </div>
+                                <a
+                                    href="{{url_for('delete_city', city_name=weather.city)}}"
+                                >
+                                    <button
+                                        type="button"
+                                        class="close"
+                                        onClick=""
+                                    >
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery and Bootstrap Bundle (includes Popper) -->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+.appdata li {
+    list-style: none;
+    width: 19%;
+    display: inline-block;
+    margin: 3.9px;
+    margin-bottom: 15px;
+    vertical-align: top;
+}
+
+.appdata {
+    margin: 0;
+    padding: 0;
+}
+
+.media.border.p-2 {
+    background-color: #eee;
+    border-radius: 10px;
+    min-height: 130px;
+    min-width: 216px;
+}
