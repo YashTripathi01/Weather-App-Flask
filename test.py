@@ -1,6 +1,6 @@
 import requests
-from flask import Flask, render_template, request
-
+from flask import Flask
+import constants
 
 app = Flask(__name__)
 
@@ -9,9 +9,9 @@ app = Flask(__name__)
 def test():
     city = 'Las Vegas'
 
-    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&APPID=your_open_weather_api_key'
+    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&APPID={}'
 
-    res = requests.get(url.format(city)).json()
+    res = requests.get(url.format(city, constants.API_KEY)).json()
 
     weather = {
         'city': city,

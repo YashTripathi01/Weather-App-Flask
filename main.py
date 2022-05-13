@@ -1,6 +1,7 @@
 import requests
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
+import constants
 
 # initializing the flask app
 app = Flask(__name__)
@@ -8,7 +9,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///weather.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # to use flash we need secret key
-app.config['SECRET_KEY'] = 'thisisasecretkey'
+app.config['SECRET_KEY'] = constants.SECRET_KEY
 
 # initialize the sqlalchemy class
 db = SQLAlchemy(app)
@@ -23,7 +24,7 @@ class City(db.Model):
 
 # function that gets the data for the cities if exists
 def get_weather_data(city):
-    url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&APPID=your_open_weather_api_key'
+    url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&APPID={constants.API_KEY}'
     response = requests.get(url).json()
 
     return response
