@@ -1,7 +1,7 @@
 import requests
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
-import constants
+#import constants
 
 # initializing the flask app
 app = Flask(__name__)
